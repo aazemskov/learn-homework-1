@@ -32,7 +32,7 @@ def greet_user(update, context):
 def talk_to_me(update, context):
     user_text = update.message.text
     print(user_text)
-    update.message.reply_text(text)
+    update.message.reply_text(user_text)
 
 def get_planets(update, context):
     list_planets = []
@@ -40,14 +40,12 @@ def get_planets(update, context):
         if name[1] == 'Planet':
             list_planets.append(name[2])
     if context.args:
-        user_message = context.args[0]
-        print(user_message)
-        if user_message in list_planets:
-            print(f'{user_message} в списке есть.')
-            planet = getattr(ephem, user_message)
-            planet = planet(date.today())
-            planet_constellation = ephem.constellation(planet)
-            return update.message.reply_text(f'Планета {user_message} находится в созвездии {planet_constellation}')
+        user_text = update.message.text
+        planet_name = user_text.split()[1].capitalize()
+        if hasattr(ephem, planet_name):
+            planet = getattr(ephem, planet_name)(date.today())
+            planet_constellation = ephem.constellation(planet)[1]
+            return update.message.reply_text(f'Планета {planet_name} находится в созвездии {planet_constellation}')
         else:
             return update.message.reply_text('Такой планеты не найдено')
     else:

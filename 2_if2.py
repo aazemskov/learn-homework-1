@@ -17,7 +17,7 @@
 
 
 def main(first_str, second_str):
-    if type(first_str) is not str or type(second_str) is not str:
+    if not (isinstance(first_str, str) and isinstance(second_str, str)):
         return 0
     elif first_str == second_str:
         return 1
@@ -28,4 +28,4 @@ def main(first_str, second_str):
 
 
 if __name__ == "__main__":
-    print(main('first_sting', 'second_string'))
+    print(main('first_sting', 123))

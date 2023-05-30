@@ -23,22 +23,21 @@ mobile_list = [
 
 
 def main(work_list):
-    phones_sum_all = 0
+    items_sold_phones_all = 0
     items_sold_len = 0
-    for mobile in mobile_list:
-        phones_sum = 0
-        items_sold_phones = mobile['items_sold']
-        items_sold_len += len(mobile['items_sold'])
-        phones_name = mobile['product']
-        for phone in items_sold_phones:
-            phones_sum += phone
-        phones_avg = phones_sum / len(items_sold_phones)
-        phones_sum_all += phones_sum
-        print('Количество проданных ' + phones_name + ':', phones_sum)
-        print('Среднее количество проданных ' + phones_name + ':', round(phones_avg, 2), '\n')
 
-    print('Общее количество всех проданных телефонов:', phones_sum_all)
-    print('Среднее количество всех проданных телефонов:', round(phones_sum_all / items_sold_len, 2))
+    for mobile in mobile_list:
+        items_sold_phones = sum(mobile['items_sold'])
+        phones_avg = items_sold_phones / len(mobile['items_sold'])
+        items_sold_phones_all += items_sold_phones
+        items_sold_len += len(mobile['items_sold'])
+        product_name = mobile['product']
+
+        print(f'Количество проданных {product_name}: {items_sold_phones}')
+        print(f'Среднее количество проданных {product_name}: {round(phones_avg, 2)} \n')
+
+    print(f'Общее количество всех проданных телефонов: {items_sold_phones_all}')
+    print(f'Среднее количество всех проданных телефонов: {round(items_sold_phones_all / items_sold_len, 2)}')
 
 
 if __name__ == "__main__":
